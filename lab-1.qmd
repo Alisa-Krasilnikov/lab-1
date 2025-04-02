@@ -171,8 +171,15 @@ your experiences. Tell me their name and professor. List one or two things that
 you think you learned more about, and one or two things that they learned more
 about.
 
-
+Allen Choi took STAT 331 with Dr. Theobold. Allen went over a lot more Github than I did with Dr. Robinson. Also, his class did not have exams, and was "ungraded," similar to the structure of this class. We also did not do a portfolio like Allen did. 
 
 15. Find someone in the class who **does not** share your birth month. Tell me
 their name and birthday, and use R to find out how many days apart your
 birthdays are.
+
+Allen Choi's birthday May 30th 2003
+
+```{r}
+difftime(as.Date("2003-11-03"), as.Date("2003-05-30"), units = "days")
+```
+
