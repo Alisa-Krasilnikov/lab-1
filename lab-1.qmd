@@ -128,7 +128,10 @@ two levels: `petrol` (any car using petrolium-based gas) and
 `alternative energy` (any car not using petrolium-based gas). 
 
 ```{r}
+library(ggplot2)
 
+mpg_adj <- mpg |> 
+  mutate(fuel_type = if_else(fl %in% c("c", "d"), "alternative energy", "petrol"))
 ```
 
 12. The `drv` variable describes if the car has front drive (`f`), rear drive
@@ -137,7 +140,12 @@ Specifically, use the `case_when()` function to change the `drv` varible to have
 the following levels: `front`, `rear`, `four wheel`. 
 
 ```{r}
-
+mpg_adj <- mpg |> 
+  mutate(drv = case_when(
+    drv == "f" ~ "front",
+    drv == "r" ~ "rear",
+    drv == "4" ~ "four wheel"
+  ))
 ```
 
 (string split + remove extra ")" )
@@ -150,7 +158,10 @@ of the `trans` column to `trans_style`.
 *Hint: You will need to deal with the stray parenthesis!* 
 
 ```{r}
-
+mpg_adj <- mpg |> 
+  mutate(trans_type = str_split(trans, pattern = "\\(")[[1]][2],
+         trans_type = str_replace(trans_type, "\\)", "")) |> 
+  rename(trans_style = trans)
 ```
 
 ## Getting to know your classmates
@@ -159,6 +170,8 @@ of the `trans` column to `trans_style`.
 your experiences. Tell me their name and professor. List one or two things that
 you think you learned more about, and one or two things that they learned more
 about.
+
+
 
 15. Find someone in the class who **does not** share your birth month. Tell me
 their name and birthday, and use R to find out how many days apart your
